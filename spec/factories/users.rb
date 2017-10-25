@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :user do
-    login "MyString"
+    sequence(:login) { |n| "Login#{n}" }
   end
 end
