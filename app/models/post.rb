@@ -2,12 +2,14 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :ratings
   validates :title, :content, presence: true
-  
+  scope :by_rating, lambda { |top = '$1'|
+    data = joins(:ratings).select(
+      'posts.id, posts.title as title, posts.content as content,
+      avg(ratings.value) as average_rating'
+    ).group('posts.id').order('average_rating DESC').limit(top)
+    data.map { |d| [d.title, d.content, d.average_rating.to_f]}
+  }
   def rating_average_value
     ratings.average(:value).to_f
-  end
-
-  def top(n)
-
   end
 end
