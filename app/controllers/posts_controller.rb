@@ -10,9 +10,20 @@ class PostsController < ApplicationController
     end
   end
 
+  def top
+    @top = Post.by_rating(params[:id])
+    render json: @top, status: 200
+  end
+
+  def repeatedly_ip_users
+    @result = {}
+    Post.repeatedly_ip.each {|i| @result[i.ip.to_s] = i.login }
+    render json: @result, status: 200
+  end
+
   private
 
   def set_params
-    params.require(:post).permit(:title, :content, :login, :ip)
+    params.require(:post).permit(:title, :content, :login, :ip, :quantity)
   end
 end
