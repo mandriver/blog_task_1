@@ -12,7 +12,7 @@ class Post < ApplicationRecord
   scope :repeatedly_ip, -> {
     joins(:user).select(
       'posts.ip as ip, array_agg(users.login) as login'
-    ).group('ip').map { |i| i if i.login.uniq.length > 1 }.compact
+    ).group('ip').map { |i| (i.login = i.login.uniq) && i if i.login.uniq.length > 1 }.compact
   }
   def rating_average_value
     ratings.average(:value).to_f

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'rating/set'
+  post 'rating/set'
 
   post 'posts/create'
   get 'posts/top/:id', to: 'posts#top'

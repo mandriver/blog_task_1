@@ -24,6 +24,7 @@ RSpec.describe Post, type: :model do
     it 'return repeatedly ip' do
       FactoryBot.create(:post, user: FactoryBot.create(:user, login: 'first_user'), ip: '10.0.0.1')
       FactoryBot.create(:post, user: FactoryBot.create(:user, login: 'last_user'), ip: '10.0.0.1')
+      FactoryBot.create(:post, user: FactoryBot.create(:user, login: 'first_user'), ip: '10.0.0.1')
       FactoryBot.create(:post, user: FactoryBot.create(:user), ip: '10.168.0.3')
       FactoryBot.create(:post, user: FactoryBot.create(:user), ip: '10.168.0.4')
       FactoryBot.create_list(:post, 2, user: FactoryBot.create(:user), ip: '10.0.0.5')
