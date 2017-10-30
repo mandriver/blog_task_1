@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
-  has_many :ratings
+  has_many :ratings, dependent: :destroy
   validates :title, :content, presence: true
   scope :by_rating, lambda { |top = 5|
     data = joins(:ratings).select(
